@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.scss'
 import { MOCK_WORKDAY_ENTRIES, type WorkdayEntry } from './types/time.types';
+import { WorkHistoryModal } from './components/WorkHistoryModal';
 
 function App() {
   //TODO: save values to local storage
@@ -9,6 +10,7 @@ function App() {
   const [currentCheckinTimestamp, setCurrentCheckinTimestamp] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [savedEntries, setSavedEntries] = useState<WorkdayEntry[]>(MOCK_WORKDAY_ENTRIES);
+  const [isWorkHistoryModalOpen, setIsWorkHistoryModalOpen] = useState(false);
 
   function toggleCheckedInState() {
     if (isCheckedIn) {
@@ -22,7 +24,7 @@ function App() {
   }
 
   function openAllEntries() {
-    // TODO: open modal
+    setIsWorkHistoryModalOpen(true);
   }
 
   //TODO: refactor inline styles
@@ -63,7 +65,7 @@ function App() {
             {savedEntries.map((entry) => {
               return <div>
                 <span style={{display: "flex", alignContent: "center", columnGap: "4px"}}>
-                  {`» Date: ${entry.date.toLocaleDateString()} — Title: ${entry.title} — Worked: ${new Date(entry.millisecondsWorked).getHours()}h and ${new Date(entry.millisecondsWorked).getMinutes()}min`}
+                  {`» Dato: ${entry.date.toLocaleDateString()} — Tittel: ${entry.title} — Timer: ${new Date(entry.millisecondsWorked).getHours()}t and ${new Date(entry.millisecondsWorked).getMinutes()}min`}
                   {entry.note && <i className='material-icons'>textsms</i>}
                 </span>
               </div>
@@ -80,10 +82,12 @@ function App() {
           </span>
 
           <div style={{padding: "12px"}}>
-            I dag er det [TODO: dato + opparbeidet innstemplet tid den dagen? ]
+            I dag er det [ TODO: dato + opparbeidet innstemplet tid den dagen? ]
           </div>
         </div>
       </section>
+
+      {isWorkHistoryModalOpen && <WorkHistoryModal savedEntries={savedEntries} onClose={() =>setIsWorkHistoryModalOpen(false)} />}
     </main>
   )
 }
