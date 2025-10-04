@@ -1,4 +1,6 @@
-# Use the command `npm run dev` in root to run the project. 
+### Use the command `npm run dev` in root to run the project. 
+
+---
 
 # React + TypeScript + Vite
 
