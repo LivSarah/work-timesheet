@@ -1,0 +1,24 @@
+
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./assets/WatchWallpaperDark.JPG');
+  background-size: cover;
+  background-position: top left;
+  overflow: hidden;
+}
+
+.header {
+  min-height: 70px;
+  display: flex;
+  background-color: #27262a;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 24px;
+  filter: drop-shadow(0px 6px 6px #101012);
+}
+
+.app-title {
+  font-size: 1.5rem;
+}
