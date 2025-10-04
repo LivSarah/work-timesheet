@@ -10,8 +10,6 @@ function App() {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [savedEntries, setSavedEntries] = useState<WorkdayEntry[]>(MOCK_WORKDAY_ENTRIES);
 
-  const todaysDate = Date.now();
-console.log(todaysDate.toExponential(), "2 ", todaysDate.toFixed(), " 3 ", todaysDate.toLocaleString, " 4 ", todaysDate.toPrecision(), " 5 ", todaysDate.toString, " 6 ", todaysDate.valueOf())
   function toggleCheckedInState() {
     if (isCheckedIn) {
       setCurrentCheckinTimestamp(0);
@@ -21,6 +19,10 @@ console.log(todaysDate.toExponential(), "2 ", todaysDate.toFixed(), " 3 ", today
       setCurrentCheckinTimestamp(Date.now());
       setIsCheckedIn(true);
     }
+  }
+
+  function openAllEntries() {
+    // TODO: open modal
   }
 
   //TODO: refactor inline styles
@@ -33,16 +35,16 @@ console.log(todaysDate.toExponential(), "2 ", todaysDate.toFixed(), " 3 ", today
       </div>
 
       <section style={{width: "100%", maxWidth: "1200px", display: "grid", gap: "36px",justifySelf: "center", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "auto 1fr", padding: "48px"}}>
-        <div style={{height: "200px", width: "100%", display: "grid", gridTemplateRows: "auto 1fr auto", gridColumn: "1 / span 2", backgroundColor: "#27262a", borderRadius: "6px", overflow: "hidden"}}>
+        <div style={{minHeight: "250px", width: "100%", display: "grid", gridTemplateRows: "auto 1fr auto", gridColumn: "1 / span 2", backgroundColor: "#27262a", borderRadius: "6px", overflow: "hidden"}}>
           <span style={{backgroundColor: "#8d3d9c", padding: "12px", display: "flex", alignItems: "center", columnGap: "4px"}}>
             <i className="material-icons">hourglass_empty</i>
-            This is the checkin' card
+            Stemple inn/ut på jobb
           </span>
 
           {/* TODO: Refactor to reusable 'card'-component */}
-          <div style={{padding: "12px"}}>
+          <p style={{padding: "24px", fontSize: "1.2rem", textAlign: "center"}}>
             {isCheckedIn ? `Du har vært stemplet inn i [timer/minutter].` : "Du er stemplet ut."}
-          </div>
+          </p>
 
           <div style={{padding: "12px", justifySelf: "center"}}>
             <button onClick={toggleCheckedInState} style={{backgroundColor: isCheckedIn ? "#d53d3d" : "#50a459", width: "200px"}}>
@@ -51,10 +53,10 @@ console.log(todaysDate.toExponential(), "2 ", todaysDate.toFixed(), " 3 ", today
           </div>
         </div>
 
-        <div style={{height: "200px", width: "100%", display: "grid", gridTemplateRows: "auto 1fr", backgroundColor: "#27262a", borderRadius: "6px", overflow: "hidden"}}>
+        <div style={{minHeight: "300px", width: "100%", display: "grid", gridTemplateRows: "auto 1fr", backgroundColor: "#27262a", borderRadius: "6px", overflow: "hidden"}}>
           <span style={{backgroundColor: "#28a9bc", padding: "12px", display: "flex", alignItems: "center", columnGap: "4px"}}>
             <i className="material-icons">date_range</i>
-            This is the checkin' card
+            Historiske oppføringer
           </span>
 
           <div style={{padding: "12px", display: "flex", flexDirection: "column", rowGap: "8px"}}>
@@ -66,10 +68,12 @@ console.log(todaysDate.toExponential(), "2 ", todaysDate.toFixed(), " 3 ", today
                 </span>
               </div>
             })}
+
+            <button style={{alignSelf: "end", marginTop: "auto"}} onClick={openAllEntries}>Se alle</button>
           </div>
         </div>
 
-        <div style={{height: "200px", width: "100%", display: "grid", gridTemplateRows: "auto 1fr", backgroundColor: "#27262a", borderRadius: "6px", overflow: "hidden"}}>
+        <div style={{minHeight: "300px", width: "100%", display: "grid", gridTemplateRows: "auto 1fr", backgroundColor: "#27262a", borderRadius: "6px", overflow: "hidden"}}>
           <span style={{backgroundColor: "#fc9127", padding: "12px", display: "flex", alignItems: "center", columnGap: "4px"}}>
             <i className="material-icons">access_time</i>
             I dag
